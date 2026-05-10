@@ -16,9 +16,7 @@
 ## Getting Started
 
 ```bash
-npm install
-
-npm run dev
+npm i && npm run dev
 ```
 
 Open http://localhost:4321/adventjs-cli-web in your browser.

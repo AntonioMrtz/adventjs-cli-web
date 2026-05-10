@@ -1,8 +1,8 @@
-[adventjs-cli](https://github.com/AntonioMrtz/adventjs-cli) landing page.
+<img src="src/assets/images/adventjs-cli.webp" alt="Website preview" width="128px">
 
 # adventjs-cli-web
 
-<img src="src/assets/images/adventjs-cli.webp" alt="Website preview" width="128px">
+[adventjs-cli](https://github.com/AntonioMrtz/adventjs-cli) landing page.
 
 ## Tech Stack
 

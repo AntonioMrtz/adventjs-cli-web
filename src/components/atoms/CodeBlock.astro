@@ -1,0 +1,19 @@
+---
+import type { CodeLanguage } from "astro";
+import type { BuiltinTheme } from "shiki";
+import { Code } from "astro/components";
+import type { CodeSnippet } from "@/data/code";
+
+type Props = {
+  data: CodeSnippet;
+};
+
+const { data } = Astro.props;
+---
+
+<Code
+  class={"flex w-full h-full p-4"}
+  code={data.code}
+  lang={data.lang}
+  theme={data.theme}
+/>

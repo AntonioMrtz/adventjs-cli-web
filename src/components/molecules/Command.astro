@@ -1,0 +1,79 @@
+---
+import clipboardIcon from "@/assets/icons/clipboard.svg";
+import checkIcon from "@/assets/icons/check.svg";
+import { SITE_INFO } from "@/data/site";
+import Image from "astro/components/Image.astro";
+
+const COMMAND_CLIPBOARD_ID = "command-clipboard";
+const COMMAND_TEXT_ID = "command-text";
+---
+
+<div class="flex flex-row gap-1 items-center justify-center">
+  <button
+    class="glass-effect p-4 text-lg cursor-pointer glass-effect-hover"
+    id={COMMAND_TEXT_ID}
+  >
+    $ {SITE_INFO.initCommand}
+  </button>
+  <button
+    class="cursor-pointer glass-effect p-2 glass-effect-hover w-12 h-12 relative"
+    id={COMMAND_CLIPBOARD_ID}
+    aria-label="Copy command to clipboard"
+  >
+    <Image
+      id="clipboard-icon"
+      src={clipboardIcon}
+      class={"invert-100 absolute inset-0 m-auto transition-opacity duration-200"}
+      alt="Copy to clipboard"
+      width={32}
+      height={32}
+    />
+    <Image
+      id="check-icon"
+      src={checkIcon}
+      class={"invert-100 absolute inset-0 m-auto transition-opacity duration-200 opacity-0"}
+      alt="Copied"
+      width={36}
+      height={36}
+    />
+  </button>
+</div>
+
+<script
+  is:inline
+  define:vars={{
+    COMMAND_CLIPBOARD_ID,
+    COMMAND_TEXT_ID,
+    command: SITE_INFO.initCommand,
+  }}
+>
+  const clipboardBtn = document.getElementById(COMMAND_CLIPBOARD_ID);
+  const commandBtn = document.getElementById(COMMAND_TEXT_ID);
+
+  const handleCommandClick = async () => {
+    try {
+      await navigator.clipboard.writeText(command);
+
+      const clipboardIcon = document.getElementById("clipboard-icon");
+      const checkIcon = document.getElementById("check-icon");
+
+      clipboardIcon.classList.add("opacity-0");
+      checkIcon.classList.remove("opacity-0");
+
+      setTimeout(() => {
+        clipboardIcon.classList.remove("opacity-0");
+        checkIcon.classList.add("opacity-0");
+      }, 2000);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
+
+  clipboardBtn?.addEventListener("click", async () => {
+    await handleCommandClick();
+  });
+
+  commandBtn?.addEventListener("click", async () => {
+    await handleCommandClick();
+  });
+</script>

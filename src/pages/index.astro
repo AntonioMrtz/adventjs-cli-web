@@ -1,17 +1,56 @@
 ---
-
+import Template from "@/components/templates/Template.astro";
+import { SITE_INFO } from "@/data/site";
+import "@/styles/global.css";
+import Font from "astro/components/Font.astro";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0d6efd" />
+    <meta name="robots" content="index, follow" />
+
+    <meta name="description" content={SITE_INFO.description} />
+    <meta name="author" content="Antonio Martínez Fernández" />
+    <meta name="keywords" content="adventjs, cli, command-line, tool" />
+    <link rel="canonical" href="https://antoniomrtz.github.io/adventjs-cli/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content={SITE_INFO.title} />
+    <meta property="og:title" content={SITE_INFO.title} />
+    <meta property="og:description" content={SITE_INFO.description} />
+    <meta
+      property="og:url"
+      content="https://antoniomrtz.github.io/adventjs-cli/"
+    />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/AntonioMrtz/adventjs-cli/master/public/preview/preview.png"
+    />
+    <meta property="og:image:alt" content="Antonio Martínez" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="300" />
+
+    <title>
+      {SITE_INFO.title}
+    </title>
+
+    <link rel="icon" href={`${import.meta.env.BASE_URL}/favicon.ico`} />
+    <link
+      rel="apple-touch-icon"
+      href={`${import.meta.env.BASE_URL}/favicon.ico`}
+    />
+    <meta name="generator" content={Astro.generator} />
+    <Font cssVariable="--font-jetbrainsmono-regular" />
+    <Font cssVariable="--font-jetbrainsmono-medium" />
+    <Font cssVariable="--font-jetbrainsmono-bold" />
+  </head>
+  <body>
+    <Template />
+  </body>
 </html>

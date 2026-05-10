@@ -1,0 +1,60 @@
+---
+import clipboardIcon from "@/assets/icons/clipboard.svg";
+import checkIcon from "@/assets/icons/check.svg";
+import Image from "astro/components/Image.astro";
+
+export interface Props {
+  command: string;
+  description: string;
+  clipboardId: string;
+  textId: string;
+  clipboardIconId: string;
+  checkIconId: string;
+  ariaLabel: string;
+}
+
+const {
+  command,
+  description,
+  clipboardId,
+  textId,
+  clipboardIconId,
+  checkIconId,
+  ariaLabel,
+} = Astro.props;
+---
+
+<div class="flex flex-row items-center gap-3">
+  <button
+    class="flex-1 text-left text-base sm:text-lg text-neutral-white-500 cursor-pointer font-mono"
+    id={textId}
+  >
+    <span class="text-neutral-white-500">$ {command}</span><span
+      class="text-neutral-white-800 text-sm italic"
+    >
+      # {description}</span
+    >
+  </button>
+  <button
+    class="cursor-pointer relative w-7 h-7 opacity-50 hover:opacity-100 transition-opacity flex items-center justify-center shrink-0"
+    id={clipboardId}
+    aria-label={ariaLabel}
+  >
+    <Image
+      id={clipboardIconId}
+      src={clipboardIcon}
+      class="invert-100 transition-opacity duration-200"
+      alt="Copy"
+      width={16}
+      height={16}
+    />
+    <Image
+      id={checkIconId}
+      src={checkIcon}
+      class="invert-100 transition-opacity duration-200 opacity-0 absolute"
+      alt="Copied"
+      width={18}
+      height={18}
+    />
+  </button>
+</div>

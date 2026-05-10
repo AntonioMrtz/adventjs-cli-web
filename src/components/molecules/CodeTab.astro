@@ -1,0 +1,169 @@
+---
+import { SITE_INFO } from "@/data/site";
+import CodeBlock from "../atoms/CodeBlock.astro";
+import CommandRow from "../atoms/CommandRow.astro";
+import { CODE_SNIPPETS } from "@/data/code";
+
+const CONTENT_CLASS = "code-tab-content";
+const TAB_CLASS = "code-tab";
+
+const INIT_CLIPBOARD_ID = "init-clipboard";
+const INIT_TEXT_ID = "init-text";
+const GEN_CLIPBOARD_ID = "gen-clipboard";
+const GEN_TEXT_ID = "gen-text";
+---
+
+<div
+  class="flex flex-col border border-solid rounded-lg max-svw w-full overflow-hidden"
+>
+  <div class="flex flex-col px-4 py-2 bg-white-10 border-b border-solid">
+    <CommandRow
+      command={SITE_INFO.initCommand.command}
+      description={SITE_INFO.initCommand.description}
+      clipboardId={INIT_CLIPBOARD_ID}
+      textId={INIT_TEXT_ID}
+      clipboardIconId="init-clipboard-icon"
+      checkIconId="init-check-icon"
+      ariaLabel="Copy init command"
+    />
+    <CommandRow
+      command={SITE_INFO.generateDayCommand.command}
+      description={SITE_INFO.generateDayCommand.description}
+      clipboardId={GEN_CLIPBOARD_ID}
+      textId={GEN_TEXT_ID}
+      clipboardIconId="gen-clipboard-icon"
+      checkIconId="gen-check-icon"
+      ariaLabel="Copy generate command"
+    />
+  </div>
+  <div class="flex flex-row gap-0 border-b border-solid border-x-0 border-t-0">
+    {
+      CODE_SNIPPETS.map((v, i) => {
+        return (
+          <button
+            class={`p-2 border border-solid cursor-pointer ${i === 0 ? "active" : ""} ${TAB_CLASS}`}
+            id={v.name}
+          >
+            {v.name}
+          </button>
+        );
+      })
+    }
+  </div>
+  <div
+    class="flex w-full max-w-3xl h-[20svh] overflow-y-auto [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden"
+  >
+    {
+      CODE_SNIPPETS.map((v, i) => {
+        return (
+          <div
+            class={`${i === 0 ? "" : "hidden"} ${CONTENT_CLASS} p-0 w-full h-full`}
+            id={v.name}
+          >
+            <CodeBlock data={v} />
+          </div>
+        );
+      })
+    }
+  </div>
+</div>
+
+<style>
+  @reference "tailwindcss";
+  @reference "../../styles/global.css";
+
+  .active {
+    @apply bg-accent-red-500/80;
+  }
+</style>
+
+<script
+  is:inline
+  define:vars={{
+    INIT_CLIPBOARD_ID,
+    INIT_TEXT_ID,
+    initCommand: SITE_INFO.initCommand.command,
+  }}
+>
+  const initClipboardBtn = document.getElementById(INIT_CLIPBOARD_ID);
+  const initTextBtn = document.getElementById(INIT_TEXT_ID);
+
+  const handleInitClick = async () => {
+    try {
+      await navigator.clipboard.writeText(initCommand);
+      const icon = document.getElementById("init-clipboard-icon");
+      const check = document.getElementById("init-check-icon");
+      icon.classList.add("opacity-0");
+      check.classList.remove("opacity-0");
+      setTimeout(() => {
+        icon.classList.remove("opacity-0");
+        check.classList.add("opacity-0");
+      }, 2000);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
+
+  initClipboardBtn?.addEventListener("click", handleInitClick);
+  initTextBtn?.addEventListener("click", handleInitClick);
+</script>
+
+<script
+  is:inline
+  define:vars={{
+    GEN_CLIPBOARD_ID,
+    GEN_TEXT_ID,
+    genCommand: SITE_INFO.generateDayCommand.command,
+  }}
+>
+  const genClipboardBtn = document.getElementById(GEN_CLIPBOARD_ID);
+  const genTextBtn = document.getElementById(GEN_TEXT_ID);
+
+  const handleGenClick = async () => {
+    try {
+      await navigator.clipboard.writeText(genCommand);
+      const icon = document.getElementById("gen-clipboard-icon");
+      const check = document.getElementById("gen-check-icon");
+      icon.classList.add("opacity-0");
+      check.classList.remove("opacity-0");
+      setTimeout(() => {
+        icon.classList.remove("opacity-0");
+        check.classList.add("opacity-0");
+      }, 2000);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
+
+  genClipboardBtn?.addEventListener("click", handleGenClick);
+  genTextBtn?.addEventListener("click", handleGenClick);
+</script>
+
+<script is:inline define:vars={{ TAB_CLASS, CONTENT_CLASS }}>
+  const tabs = Array.from(window.document.getElementsByClassName(TAB_CLASS));
+  const contents = Array.from(
+    window.document.getElementsByClassName(CONTENT_CLASS),
+  );
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const targetId = tab.id;
+
+      contents.forEach((content) => {
+        if (content.id === targetId) {
+          content.classList.remove("hidden");
+        } else {
+          content.classList.add("hidden");
+        }
+      });
+
+      tabs.forEach((t) => {
+        if (t === tab) {
+          t.classList.add("active");
+        } else {
+          t.classList.remove("active");
+        }
+      });
+    });
+  });
+</script>

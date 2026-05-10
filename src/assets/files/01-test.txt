@@ -1,0 +1,7 @@
+import { filterGifts } from './01';
+
+describe('Challenge Day 1', () => {
+  it('should ...', () => {
+    // TODO: Add test cases
+  });
+});

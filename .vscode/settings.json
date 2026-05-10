@@ -6,7 +6,8 @@
     "Martínez",
     "Fernández",
     "jetbrainsmono",
-    "shiki"
+    "shiki",
+    "nvmrc"
   ],
   "editor.formatOnSave": true,
   "editor.tabSize": 2

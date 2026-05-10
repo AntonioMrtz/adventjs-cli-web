@@ -10,7 +10,7 @@ export default defineConfig({
   },
 
   site: "https://antoniomrtz.github.io",
-  base: "/adventjs-cli",
+  base: "/adventjs-cli-web",
   integrations: [sitemap()],
   fonts: [
     {

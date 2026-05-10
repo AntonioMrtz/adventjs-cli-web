@@ -6,7 +6,6 @@ import FeatureCard from "../molecules/FeatureCard.astro";
 <div class="w-full overflow-hidden">
   <div class="flex gap-6 animate-marquee">
     {FEATURES.map((feature) => <FeatureCard data={feature} />)}
-    {FEATURES.map((feature) => <FeatureCard data={feature} />)}
   </div>
 </div>
 
@@ -16,7 +15,7 @@ import FeatureCard from "../molecules/FeatureCard.astro";
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-1000%);
+      transform: translateX(-50%);
     }
   }
 

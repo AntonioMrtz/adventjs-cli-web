@@ -8,7 +8,6 @@
 
 - Astro
 - Tailwind CSS
-- Marked
 - ESLint
 - Prettier
 - Husky

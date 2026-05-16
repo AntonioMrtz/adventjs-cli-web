@@ -1,0 +1,64 @@
+---
+import { LINKS } from "@/data/links";
+import { Image } from "astro:assets";
+---
+
+<nav class="sidebar-links" aria-label="External links">
+  {
+    LINKS.map((link) => (
+      <a
+        href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="sidebar-link glass-effect glass-effect-hover"
+        aria-label={link.name}
+        data-tooltip={link.name}
+      >
+        <Image
+          src={link.icon}
+          width={24}
+          height={24}
+          alt={link.name}
+          loading="lazy"
+        />
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  @reference "tailwindcss";
+  @reference "../../styles/global.css";
+
+  .sidebar-links {
+    @apply fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3;
+  }
+
+  .sidebar-link {
+    @apply relative flex items-center justify-center p-2 rounded-lg transition-colors;
+  }
+
+  .sidebar-link::after {
+    content: attr(data-tooltip);
+    @apply absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2 py-1 text-xs font-medium text-neutral-white-500 whitespace-nowrap rounded-md;
+    border: var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    box-shadow: var(--glass-shadow);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms ease;
+  }
+
+  .sidebar-link:hover::after {
+    opacity: 1;
+  }
+
+  /* Hide on mobile — bottom badges take over */
+  @media (max-width: 1024px) {
+    .sidebar-links {
+      display: none;
+    }
+  }
+</style>

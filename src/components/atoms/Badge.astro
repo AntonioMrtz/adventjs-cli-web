@@ -13,8 +13,14 @@ const { data } = Astro.props;
   href={data.url}
   target="_blank"
   rel="noopener noreferrer"
-  class="glass-effect flex flex-row gap-2 items-center justify-center p-2 glass-effect-hover rounded-lg min-w-32"
+  class="glass-effect flex flex-row gap-2 items-center justify-center p-2 glass-effect-hover rounded-lg w-36"
 >
-  <Image src={data.icon} width={24} height={24} alt={data.name} />
+  <Image
+    src={data.icon}
+    width={24}
+    height={24}
+    alt={data.name}
+    loading={"lazy"}
+  />
   <span class="text-sm font-bold">{data.name}</span>
 </a>

@@ -6,13 +6,15 @@ import { Image } from "astro:assets";
 <div class="flex items-center justify-center flex-col gap-4 text-center">
   <Image
     src={SITE_INFO.logo}
-    width={128}
-    height={128}
     alt={SITE_INFO.title}
-    loading={"eager"}
+    loading="eager"
+    format="webp"
+    class="w-32 h-32"
   />
-  <h1 class="text-7xl font-extrabold">{SITE_INFO.name}</h1>
-  <p class="text-xl text-neutral-white-600">
+  <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold">
+    {SITE_INFO.name}
+  </h1>
+  <p class="text-base sm:text-xl text-neutral-white-600">
     {SITE_INFO.tagline} by <a
       href={SITE_INFO.midudev.url}
       target="_blank"
@@ -20,7 +22,9 @@ import { Image } from "astro:assets";
       class="text-accent-red hover:underline">{SITE_INFO.midudev.handle}</a
     >
   </p>
-  <p class="text-lg text-center text-neutral-white-800 tracking-widest">
+  <p
+    class="text-sm sm:text-lg text-center text-neutral-white-800 tracking-widest"
+  >
     {SITE_INFO.description}
   </p>
 </div>

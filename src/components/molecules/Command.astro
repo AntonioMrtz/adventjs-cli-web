@@ -8,15 +8,17 @@ const COMMAND_CLIPBOARD_ID = "command-clipboard";
 const COMMAND_TEXT_ID = "command-text";
 ---
 
-<div class="flex flex-row gap-1 items-center justify-center">
+<div
+  class="flex flex-col sm:flex-row gap-2 sm:gap-1 items-center justify-center w-full"
+>
   <button
-    class="glass-effect p-4 text-lg cursor-pointer glass-effect-hover"
+    class="glass-effect p-3 sm:p-4 text-sm sm:text-lg cursor-pointer glass-effect-hover w-full sm:w-auto break-all text-left"
     id={COMMAND_TEXT_ID}
   >
     $ {SITE_INFO.initCommand}
   </button>
   <button
-    class="cursor-pointer glass-effect p-2 glass-effect-hover w-12 h-12 relative"
+    class="cursor-pointer glass-effect p-2 glass-effect-hover w-12 h-12 relative sm:w-12 sm:h-12"
     id={COMMAND_CLIPBOARD_ID}
     aria-label="Copy command to clipboard"
   >
@@ -27,6 +29,7 @@ const COMMAND_TEXT_ID = "command-text";
       alt="Copy to clipboard"
       width={32}
       height={32}
+      loading="eager"
     />
     <Image
       id="check-icon"
@@ -35,6 +38,7 @@ const COMMAND_TEXT_ID = "command-text";
       alt="Copied"
       width={36}
       height={36}
+      loading="lazy"
     />
   </button>
 </div>

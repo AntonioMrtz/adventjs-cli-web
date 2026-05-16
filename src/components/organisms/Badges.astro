@@ -3,6 +3,6 @@ import { LINKS } from "@/data/links";
 import Badge from "../atoms/Badge.astro";
 ---
 
-<div class="flex flex-row gap-2 items-center justify-center">
+<div class="flex flex-row flex-wrap gap-2 items-center justify-center">
   {LINKS.map((link) => <Badge data={link} />)}
 </div>

@@ -1,4 +1,4 @@
-import logoIcon from "@/assets/images/adventjs-cli.webp";
+import logoIcon from "@/assets/images/adventjs-cli.jpeg";
 
 export { SITE_INFO };
 

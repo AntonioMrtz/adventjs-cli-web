@@ -1,4 +1,4 @@
-<img src="src/assets/images/adventjs-cli.webp" alt="Website preview" width="128px">
+<img src="src/assets/images/adventjs-cli.jpeg" alt="Website preview" width="128px">
 
 # adventjs-cli-web
 

@@ -1,0 +1,109 @@
+---
+// prettier-ignore
+const FLAKES = [
+  { side: "left", top: "6%", size: "4px", delay: "0s", duration: "10s", x: "12px", opacity: "0.9" },
+  { side: "left", top: "18%", size: "3px", delay: "-2s", duration: "11s", x: "20px", opacity: "0.72" },
+  { side: "left", top: "30%", size: "5px", delay: "-4s", duration: "12s", x: "10px", opacity: "0.84" },
+  { side: "left", top: "42%", size: "3px", delay: "-6s", duration: "10s", x: "18px", opacity: "0.58" },
+  { side: "left", top: "54%", size: "4px", delay: "-1s", duration: "11s", x: "14px", opacity: "0.76" },
+  { side: "left", top: "66%", size: "2px", delay: "-5s", duration: "9s", x: "22px", opacity: "0.5" },
+  { side: "left", top: "78%", size: "3px", delay: "-3s", duration: "12s", x: "16px", opacity: "0.66" },
+  { side: "left", top: "90%", size: "2px", delay: "-7s", duration: "10s", x: "24px", opacity: "0.44" },
+  { side: "right", top: "8%", size: "4px", delay: "-1s", duration: "10s", x: "12px", opacity: "0.9" },
+  { side: "right", top: "20%", size: "3px", delay: "-3s", duration: "11s", x: "20px", opacity: "0.68" },
+  { side: "right", top: "32%", size: "5px", delay: "-5s", duration: "12s", x: "10px", opacity: "0.82" },
+  { side: "right", top: "44%", size: "3px", delay: "-7s", duration: "10s", x: "18px", opacity: "0.6" },
+  { side: "right", top: "56%", size: "4px", delay: "-2s", duration: "11s", x: "14px", opacity: "0.74" },
+  { side: "right", top: "68%", size: "2px", delay: "-6s", duration: "9s", x: "22px", opacity: "0.46" },
+  { side: "right", top: "80%", size: "3px", delay: "-4s", duration: "12s", x: "16px", opacity: "0.64" },
+  { side: "right", top: "92%", size: "2px", delay: "-8s", duration: "10s", x: "24px", opacity: "0.42" },
+];
+---
+
+<div class="snow-layer" aria-hidden="true">
+  <div class="snow-side snow-side-left">
+    {
+      FLAKES.filter((flake) => flake.side === "left").map((flake) => (
+        <span
+          class="snowflake"
+          style={`top: ${flake.top}; --size: ${flake.size}; --delay: ${flake.delay}; --duration: ${flake.duration}; --drift: ${flake.x}; --opacity: ${flake.opacity};`}
+        />
+      ))
+    }
+  </div>
+  <div class="snow-side snow-side-right">
+    {
+      FLAKES.filter((flake) => flake.side === "right").map((flake) => (
+        <span
+          class="snowflake"
+          style={`top: ${flake.top}; --size: ${flake.size}; --delay: ${flake.delay}; --duration: ${flake.duration}; --drift: ${flake.x}; --opacity: ${flake.opacity};`}
+        />
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  @reference "tailwindcss";
+  @reference "../../styles/global.css";
+
+  .snow-layer {
+    @apply fixed inset-0 pointer-events-none z-0 isolate overflow-hidden;
+  }
+
+  .snow-side {
+    @apply absolute top-0 h-full w-40 sm:w-48 md:w-60;
+  }
+
+  .snow-side-left {
+    left: 0;
+    min-width: 300px;
+  }
+
+  .snow-side-right {
+    right: 0;
+    min-width: 300px;
+  }
+
+  .snowflake {
+    position: absolute;
+    left: 50%;
+    width: var(--size);
+    height: var(--size);
+    margin-left: calc(var(--drift) * -1);
+    border-radius: 9999px;
+    background: rgb(255 255 255 / var(--opacity));
+    box-shadow: 0 0 16px rgb(255 255 255 / 0.6);
+    animation: snow-fall var(--duration) linear infinite;
+    animation-delay: var(--delay);
+  }
+
+  .snow-side-right .snowflake {
+    left: auto;
+    right: 50%;
+    margin-left: 0;
+    margin-right: calc(var(--drift) * -1);
+  }
+
+  @keyframes snow-fall {
+    0% {
+      transform: translate3d(0, -10vh, 0);
+      opacity: 0;
+    }
+
+    10% {
+      opacity: var(--opacity);
+    }
+
+    100% {
+      transform: translate3d(calc(var(--drift) * 0.75), 110vh, 0);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .snow-layer {
+      display: none;
+    }
+  }
+</style>
